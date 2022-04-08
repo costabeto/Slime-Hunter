@@ -32,27 +32,16 @@ public class player : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-
     if (hp > 0)
     {
       Movement();
       Attack();
       UpdateUI();
-
-      if (isHurt)
-      {
-        rig2D.MovePosition(transform.position + new Vector3(-1, -1, 0) * 10 * Time.deltaTime);
-        anim.SetTrigger("isHurt");
-        isHurt = false;
-      }
-
     }
-
-    if (hp <= 0)
+    else
     {
       anim.SetTrigger("isDead");
     }
-
   }
   void UpdateUI()
   {
@@ -66,6 +55,12 @@ public class player : MonoBehaviour
     rig2D.MovePosition(transform.position + new Vector3(moveX, moveY, 0) * speed * Time.deltaTime);
     FixedUpdate();
     Animation();
+
+    if (isHurt)
+    {
+      anim.SetTrigger("isHurt");
+      isHurt = false;
+    }
   }
 
   void FixedUpdate()
